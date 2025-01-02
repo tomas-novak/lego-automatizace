@@ -1,0 +1,30 @@
+name: LEGO Checker Workflow
+
+on:
+on:
+  schedule:
+    - cron: "0 8 * * *"  # Spustí se v 8:00 UTC
+    - cron: "0 13 * * *" # Spustí se v 13:00 UTC
+    - cron: "0 19 * * *" # Spustí se v 19:00 UTC
+  workflow_dispatch: # Umožní manuální spuštění
+
+jobs:
+  check-lego:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3 # Stáhne váš repozitář
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12.8" # Zvolte verzi Pythonu
+
+      - name: Install dependencies
+        run: |
+          pip install selenium webdriver-manager
+
+      - name: Run LEGO Checker
+        run: |
+          python lego_checker.py
