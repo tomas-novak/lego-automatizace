@@ -52,13 +52,15 @@ def fetch_data():
             price = "Cena nenalezena"
 
         # Přidání výsledků do seznamu
+        if isinstance(results, list):
             results.append([
-            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            url,
-            availability,
-            price
-        ])
-        print(f"Výsledek pro {url}: Dostupnost: {availability}, Cena: {price}")
+                datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                url,
+                availability,
+                price
+            ])
+        else:
+            print("Chyba: Results musí být seznam.")
 
     driver.quit()
     print(f"Shromážděná data: {results}")
@@ -104,14 +106,12 @@ def check_for_changes(previous_data, current_data):
     return changes
 
 # Funkce pro uložení aktuálních dat
-def save_data(file_name, data):
+def save_data(file_name, data, changes_detected):
     with open(file_name, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(["timestamp", "url", "availability", "price"])
-        if isinstance(data, list) and all(isinstance(row, list) for row in data):
-            writer.writerows(data)
-        else:
-            print("Chyba: Data musí být seznam obsahující seznamy.")
+        writer.writerow(["timestamp", "url", "availability", "price", "changes_detected"])
+        for row in data:
+            writer.writerow(row + [changes_detected])
 
 # Hlavní část skriptu
 file_name = "lego_results.csv"
@@ -119,17 +119,10 @@ previous_data = load_previous_data(file_name)
 current_data = fetch_data()
 changes = check_for_changes(previous_data, current_data)
 
-if changes:
+changes_detected = len(changes) > 0
+
+if changes_detected:
     change_message = "\n\n".join(changes)
     send_email("Změny na LEGO stránkách", change_message)
 
-def save_data(file_name, data):
-    print(f"Ukládám data do {file_name}: {data}")
-    with open(file_name, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        writer.writerow(["timestamp", "url", "availability", "price"])
-        if isinstance(data, list) and all(isinstance(row, list) for row in data):
-            writer.writerows(data)
-        else:
-            print("Chyba: Data musí být seznam obsahující seznamy.")
-
+save_data(file_name, current_data, changes_detected)
