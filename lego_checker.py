@@ -93,15 +93,15 @@ def check_for_changes(previous_data, current_data):
     changes = []
     for timestamp, url, availability, price in current_data:
         if url not in previous_data:
-            changes.append(f"Nový záznam pro {url}:
+            changes.append(f"""Nový záznam pro {url}:
  - Dostupnost: {availability}
- - Cena: {price}")
+ - Cena: {price}""")
         else:
             prev_availability, prev_price = previous_data[url]
             if availability != prev_availability or price != prev_price:
-                changes.append(f"Změna pro {url}:
+                changes.append(f"""Změna pro {url}:
  - Dostupnost: {prev_availability} -> {availability}
- - Cena: {prev_price} -> {price}")
+ - Cena: {prev_price} -> {price}""")
     return changes
 
 # Funkce pro uložení aktuálních dat
