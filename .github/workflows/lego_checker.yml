@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12.8" # Zvolte verzi Pythonu
+          python-version: "3.12.8"
 
       - name: Install dependencies
         run: |
@@ -26,4 +26,12 @@ jobs:
 
       - name: Run LEGO Checker
         run: |
-          python lego_checker.py
+          python "lego_checker.py"
+
+      - name: Commit and push updated CSV
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add lego_results.csv
+          git commit -m "Update LEGO results"
+          git push

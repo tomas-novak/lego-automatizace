@@ -1,8 +1,10 @@
+import csv
+import datetime
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-import time
 
 # URL produktů
 URLS = [
@@ -10,35 +12,62 @@ URLS = [
     "https://www.lego.com/cs-cz/product/tudor-corner-10350"
 ]
 
-# Funkce pro kontrolu dostupnosti
-def check_availability():
-    try:
-        # Nastavení pro WebDriver s použitím WebDriver Manager
-        options = webdriver.ChromeOptions()
-        options.add_argument("--headless")  # Režim bez okna
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--log-level=3")  # Potlačí většinu výstupů Chromu
-        options.add_argument("--disable-logging")
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+# Funkce pro kontrolu dostupnosti a ceny
+def fetch_data():
+    results = []
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # Režim bez okna
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--log-level=3")  # Potlačí většinu výstupů Chromu
+    options.add_argument("--disable-logging")
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
 
-        for url in URLS:
-            print(f"Kontroluji dostupnost na URL: {url}")
-            driver.get(url)
-            time.sleep(5)  # Počkejte na načtení obsahu stránky
+    for url in URLS:
+        print(f"Zpracovávám URL: {url}")
+        driver.get(url)
 
-            # Najdi element s informací o dostupnosti
-            try:
-                availability_element = driver.find_element(By.CSS_SELECTOR, '[data-test="product-overview-availability"]')
-                print(f"Stav na stránkách LEGO ({url}): {availability_element.text}")
-            except Exception:
-                print(f"Nepodařilo se najít informace o dostupnosti na stránkách ({url}).")
+        # Extrakce dostupnosti
+        try:
+            availability_element = driver.find_element(By.CSS_SELECTOR, '[data-test="product-overview-availability"]')
+            availability = availability_element.text
+        except Exception:
+            availability = "Dostupnost nenalezena"
 
-        driver.quit()
-    except Exception as e:
-        print(f"Došlo k chybě při kontrole dostupnosti: {e}")
+        # Extrakce ceny
+        try:
+            price_element = driver.find_element(By.CSS_SELECTOR, '[data-test="product-price"]')
+            price = price_element.text
+        except Exception:
+            price = "Cena nenalezena"
 
-# Spuštění kontroly
-if __name__ == "__main__":
-    check_availability()
+        # Přidání výsledků do seznamu
+        results.append([
+            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            url,
+            availability,
+            price
+        ])
+
+    driver.quit()
+    return results
+
+# Funkce pro přidání dat do CSV
+def append_to_csv(file_name, data):
+    file_exists = os.path.isfile(file_name)
+
+    with open(file_name, mode='a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+
+        # Přidejte záhlaví, pokud soubor ještě neexistuje
+        if not file_exists:
+            writer.writerow(["timestamp", "set_url", "availability", "price"])
+
+        # Přidejte nové řádky
+        writer.writerows(data)
+
+# Použití funkcí
+file_name = "lego_results.csv"
+data = fetch_data()
+append_to_csv(file_name, data)
