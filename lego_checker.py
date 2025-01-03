@@ -52,17 +52,16 @@ def fetch_data():
             price = "Cena nenalezena"
 
         # Přidání výsledků do seznamu
-        if isinstance(results, list):
             results.append([
-                datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                url,
-                availability,
-                price
-            ])
-        else:
-            print("Chyba: Results musí být seznam.")
+            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            url,
+            availability,
+            price
+        ])
+        print(f"Výsledek pro {url}: Dostupnost: {availability}, Cena: {price}")
 
     driver.quit()
+    print(f"Shromážděná data: {results}")
     return results
 
 # Funkce pro načtení předchozích dat
@@ -124,4 +123,13 @@ if changes:
     change_message = "\n\n".join(changes)
     send_email("Změny na LEGO stránkách", change_message)
 
-save_data(file_name, current_data)
+def save_data(file_name, data):
+    print(f"Ukládám data do {file_name}: {data}")
+    with open(file_name, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(["timestamp", "url", "availability", "price"])
+        if isinstance(data, list) and all(isinstance(row, list) for row in data):
+            writer.writerows(data)
+        else:
+            print("Chyba: Data musí být seznam obsahující seznamy.")
+
