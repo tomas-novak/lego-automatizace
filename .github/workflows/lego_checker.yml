@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3 # Stáhne váš repozitář
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,7 +29,13 @@ jobs:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }} # Načtení hesla z GitHub Secrets
         run: python lego_checker.py
 
+      - name: Check for changes
+        run: |
+          git status
+          ls -la
+
       - name: Commit and push updated CSV
+        if: success() && steps.check-for-changes.outputs.changed == 'true'
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
