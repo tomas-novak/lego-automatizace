@@ -18,15 +18,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12.8"
+          python-version: "3.12" # Verze Pythonu
 
       - name: Install dependencies
         run: |
           pip install selenium webdriver-manager
 
       - name: Run LEGO Checker
-        run: |
-          python "lego_checker.py"
+        env:
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }} # Načtení hesla z GitHub Secrets
+        run: python lego_checker.py
 
       - name: Commit and push updated CSV
         run: |
