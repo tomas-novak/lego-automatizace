@@ -110,11 +110,13 @@ def check_for_changes(previous_data, current_data):
 
 # Funkce pro uložení aktuálních dat
 def save_data(file_name, data, changes_detected):
+    print(f"Ukládám data do {file_name}: {data}")
     with open(file_name, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(["timestamp", "url", "availability", "price", "changes_detected"])
         for row in data:
             writer.writerow(row + [changes_detected])
+    print(f"Data úspěšně uložena do {file_name}")
 
 # Hlavní část skriptu
 file_name = "./lego_results.csv"
@@ -129,11 +131,4 @@ if changes_detected:
     change_message = "\n\n".join(changes)
     send_email("Změny na LEGO stránkách", change_message)
 
-def save_data(file_name, data, changes_detected):
-    print(f"Ukládám data do {file_name}: {data}")
-    with open(file_name, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        writer.writerow(["timestamp", "url", "availability", "price", "changes_detected"])
-        for row in data:
-            writer.writerow(row + [changes_detected])
-    print("Ukládání dokončeno.")
+

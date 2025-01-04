@@ -24,6 +24,9 @@ jobs:
         run: |
           pip install selenium webdriver-manager
 
+      - name: List all files
+        run: ls -la      
+
       - name: Run LEGO Checker
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }} # Načtení hesla z GitHub Secrets
