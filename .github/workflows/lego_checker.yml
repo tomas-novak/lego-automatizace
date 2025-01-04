@@ -43,4 +43,5 @@ jobs:
           git push || echo "No changes to push"
 
       - name: Show Git status
-         run: git status
+        run: |
+          git status
