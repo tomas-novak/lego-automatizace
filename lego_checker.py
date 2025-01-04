@@ -11,8 +11,8 @@ from selenium.webdriver.chrome.service import Service
 
 # Konfigurace SMTP pro Seznam.cz
 SMTP_SERVER = "smtp.seznam.cz"
-SMTP_PORT = 587
-EMAIL_ADDRESS = "your-email@seznam.cz"  # Váš e-mail
+SMTP_PORT = 465
+EMAIL_ADDRESS = "novaktomas111@seznam.cz"  # Váš e-mail
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Heslo načtené z GitHub Secrets
 
 # URL produktů
@@ -79,15 +79,18 @@ def load_previous_data(file_name):
 def send_email(subject, body):
     msg = MIMEMultipart()
     msg["From"] = EMAIL_ADDRESS
-    msg["To"] = EMAIL_ADDRESS
+    msg["To"] = "novaktomas111@gmail.com"
     msg["Subject"] = subject
     msg.attach(MIMEText(body, "plain"))
 
-    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-        server.starttls()
-        server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        server.sendmail(EMAIL_ADDRESS, EMAIL_ADDRESS, msg.as_string())
-        print("E-mail byl úspěšně odeslán.")
+    try:
+        # Použití SSL připojení
+        with smtplib.SMTP_SSL(SMTP_SERVER, 465) as server:
+            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            server.sendmail(EMAIL_ADDRESS, EMAIL_ADDRESS, msg.as_string())
+            print("E-mail byl úspěšně odeslán.")
+    except Exception as e:
+        print(f"Chyba při odesílání e-mailu: {e}")
 
 # Funkce pro porovnání a detekci změn
 def check_for_changes(previous_data, current_data):
