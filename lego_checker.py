@@ -52,15 +52,12 @@ def fetch_data():
             price = "Cena nenalezena"
 
         # Přidání výsledků do seznamu
-        if isinstance(results, list):
-            results.append([
-                datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                url,
-                availability,
-                price
-            ])
-        else:
-            print("Chyba: Results musí být seznam.")
+        results.append([
+            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            url,
+            availability,
+            price
+        ])
 
     driver.quit()
     print(f"Shromážděná data: {results}")
@@ -111,12 +108,12 @@ def check_for_changes(previous_data, current_data):
 # Funkce pro uložení aktuálních dat
 def save_data(file_name, data, changes_detected):
     print(f"Ukládám data do {file_name}: {data}")
-    with open(file_name, mode='w', newline='', encoding='utf-8') as file:
+    with open(file_name, mode='a', newline='', encoding='utf-8') as file:  # Použití režimu 'a' pro přílohu
         writer = csv.writer(file)
-        writer.writerow(["timestamp", "url", "availability", "price", "changes_detected"])
+        if os.stat(file_name).st_size == 0:  # Přidání záhlaví pouze pro prázdný soubor
+            writer.writerow(["timestamp", "url", "availability", "price", "changes_detected"])
         for row in data:
             writer.writerow(row + [changes_detected])
-            writer.writerow([datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "Timestamp", "", "", ""])
     print(f"Data úspěšně uložena do {file_name}")
 
 # Hlavní část skriptu
@@ -132,4 +129,4 @@ if changes_detected:
     change_message = "\n\n".join(changes)
     send_email("Změny na LEGO stránkách", change_message)
 
-
+save_data(file_name, current_data, changes_detected)

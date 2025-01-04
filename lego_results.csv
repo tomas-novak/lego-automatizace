@@ -1,3 +1,5 @@
-timestamp,url,availability,price
-2025-01-03 21:42:27,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"499,00 Kč"
-2025-01-03 21:42:30,https://www.lego.com/cs-cz/product/tudor-corner-10350,Již brzy,"5899,00 Kč"
+timestamp,url,availability,price,changes_detected
+2025-01-04 23:03:07,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"499,00 Kč",True
+2025-01-04 23:03:22,https://www.lego.com/cs-cz/product/tudor-corner-10350,Skladem,"5899,00 Kč",True
+2025-01-04 23:06:01,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"499,00 Kč",False
+2025-01-04 23:06:10,https://www.lego.com/cs-cz/product/tudor-corner-10350,Skladem,"5899,00 Kč",False
