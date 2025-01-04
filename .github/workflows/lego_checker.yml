@@ -37,6 +37,9 @@ jobs:
           git status
           ls -la
 
+      - name: Show Git differences
+        run: git diff lego_results.csv || echo "No differences found"     
+
       - name: Commit and push updated CSV
         run: |
           git config --local user.name "GitHub Actions"
@@ -44,6 +47,9 @@ jobs:
           git add lego_results.csv
           git commit -m "Update LEGO results" || echo "No changes to commit"
           git push || echo "No changes to push"
+
+      - name: Show CSV content
+        run: cat lego_results.csv    
 
       - name: Show Git status
         run: |

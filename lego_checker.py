@@ -116,6 +116,7 @@ def save_data(file_name, data, changes_detected):
         writer.writerow(["timestamp", "url", "availability", "price", "changes_detected"])
         for row in data:
             writer.writerow(row + [changes_detected])
+            writer.writerow([datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "Timestamp", "", "", ""])
     print(f"Data úspěšně uložena do {file_name}")
 
 # Hlavní část skriptu
