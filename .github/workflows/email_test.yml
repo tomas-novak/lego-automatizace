@@ -24,4 +24,4 @@ jobs:
       - name: Run Email Test Script
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Načte heslo z GitHub Secrets
-        run: python email_test_script.py
+        run: python email_script.py
