@@ -12,8 +12,16 @@ timestamp,url,availability,price,changes_detected
 2025-01-05 14:36:05,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"99,00 Kč",True
 2025-01-05 14:36:13,https://www.lego.com/cs-cz/product/tudor-corner-10350,Skladem,"5899,00 Kč",True
 2025-01-05 14:48:24,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"499,00 Kč",True
+<<<<<<< HEAD
 2025-01-05 14:48:28,https://www.lego.com/cs-cz/product/tudor-corner-10350,Skladem,"5899,00 Kč",False
 2025-01-05 22:45:01,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"499,00 Kč",False
 2025-01-05 22:45:03,https://www.lego.com/cs-cz/product/eeyore-40797,Již brzy – 1. února 2025,"259,00 Kč",True
 2025-01-05 22:45:06,https://www.lego.com/cs-cz/product/frodo-gollum-40630,Dočasně není na skladě,"379,00 Kč",True
 2025-01-05 22:45:08,https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672,Dočasně není na skladě,"499,00 Kč",True
+=======
+2025-01-05 14:48:28,https://www.lego.com/cs-cz/product/tudor-corner-10350,Dočasně není na skladě,"5899,00 Kč",False
+2025-01-05 14:54:20,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"499,00 Kč",False
+2025-01-05 14:54:23,https://www.lego.com/cs-cz/product/tudor-corner-10350,Skladem,"5899,00 Kč",True
+2025-01-05 19:08:31,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Dočasně není na skladě,"499,00 Kč",False
+2025-01-05 19:08:34,https://www.lego.com/cs-cz/product/tudor-corner-10350,Skladem,"5899,00 Kč",False
+>>>>>>> 20988951389ff15b9fcbbb9e446e686219862f17
