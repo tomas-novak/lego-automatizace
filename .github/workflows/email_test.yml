@@ -1,0 +1,27 @@
+name: Email Test Workflow
+
+on:
+  workflow_dispatch:  # Umožní manuální spuštění
+  schedule:
+    - cron: "0 9 * * *"  # Volitelné: Spouští v 9:00 UTC každý den
+
+jobs:
+  test-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"  # Nastavte verzi Pythonu dle potřeby
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt || echo "No dependencies found"
+
+      - name: Run Email Test Script
+        env:
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Načte heslo z GitHub Secrets
+        run: python email_test_script.py
