@@ -106,13 +106,13 @@ def check_for_changes(previous_data, current_data):
     return changes
 
 # Funkce pro uložení aktuálních dat
-def save_data(file_name, data, changes_detected):
+def save_data(file_name, data, changes_detected_per_row):
     print(f"Ukládám data do {file_name}: {data}")
     with open(file_name, mode='a', newline='', encoding='utf-8') as file:  # Použití režimu 'a' pro přílohu
         writer = csv.writer(file)
         if os.stat(file_name).st_size == 0:  # Přidání záhlaví pouze pro prázdný soubor
             writer.writerow(["timestamp", "url", "availability", "price", "changes_detected"])
-        for row in data:
+        for row, changes_detected in zip(data, changes_detected_per_row):
             writer.writerow(row + [changes_detected])
     print(f"Data úspěšně uložena do {file_name}")
 
@@ -120,13 +120,29 @@ def save_data(file_name, data, changes_detected):
 file_name = "./lego_results.csv"
 previous_data = load_previous_data(file_name)
 current_data = fetch_data()
-changes = check_for_changes(previous_data, current_data)
 
-changes_detected = len(changes) > 0
-print(f"Zjištěné změny: {changes_detected}")
+# Zjištění změn pro každý záznam
+changes_detected_per_row = []
+changes = []
+for timestamp, url, availability, price in current_data:
+    if url not in previous_data:
+        changes.append(f"""Nový záznam pro {url}:
+ - Dostupnost: {availability}
+ - Cena: {price}""")
+        changes_detected_per_row.append(True)
+    else:
+        prev_availability, prev_price = previous_data[url]
+        if availability != prev_availability or price != prev_price:
+            changes.append(f"""Změna pro {url}:
+ - Dostupnost: {prev_availability} -> {availability}
+ - Cena: {prev_price} -> {price}""")
+            changes_detected_per_row.append(True)
+        else:
+            changes_detected_per_row.append(False)
 
-if changes_detected:
+if changes:
     change_message = "\n\n".join(changes)
     send_email("Změny na LEGO stránkách", change_message)
 
-save_data(file_name, current_data, changes_detected)
+save_data(file_name, current_data, changes_detected_per_row)
+
