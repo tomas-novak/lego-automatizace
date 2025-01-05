@@ -21,24 +21,12 @@ jobs:
           python-version: "3.12" # Verze Pythonu
 
       - name: Install dependencies
-        run: |
-          pip install selenium webdriver-manager
-
-      - name: List all files
-        run: ls -la      
+        run: pip install selenium webdriver-manager
 
       - name: Run LEGO Checker
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }} # Načtení hesla z GitHub Secrets
         run: python lego_checker.py
-
-      - name: Check for changes
-        run: |
-          git status
-          ls -la
-
-      - name: Show Git differences
-        run: git diff lego_results.csv || echo "No differences found"     
 
       - name: Commit and push updated CSV
         run: |
@@ -47,10 +35,3 @@ jobs:
           git add lego_results.csv
           git commit -m "Update LEGO results" || echo "No changes to commit"
           git push || echo "No changes to push"
-
-      - name: Show CSV content
-        run: cat lego_results.csv    
-
-      - name: Show Git status
-        run: |
-          git status
