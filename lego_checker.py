@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.service import Service
 SMTP_SERVER = "smtp.seznam.cz"
 SMTP_PORT = 465
 EMAIL_ADDRESS = "novaktomas111@seznam.cz"  # Váš e-mail
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Heslo načtené z GitHub Secrets
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Heslo načtené z proměnné prostředí
 
 # URL produktů
 URLS = [
@@ -82,9 +82,9 @@ def send_email(subject, body):
 
     try:
         # Použití SSL připojení
-        with smtplib.SMTP_SSL(SMTP_SERVER, 465) as server:
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            server.sendmail(EMAIL_ADDRESS, EMAIL_ADDRESS, msg.as_string())
+            server.sendmail(EMAIL_ADDRESS, "novaktomas111@gmail.com", msg.as_string())
             print("E-mail byl úspěšně odeslán.")
     except Exception as e:
         print(f"Chyba při odesílání e-mailu: {e}")
