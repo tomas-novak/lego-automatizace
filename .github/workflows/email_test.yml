@@ -2,8 +2,6 @@ name: Email Test Workflow
 
 on:
   workflow_dispatch:  # Umožní manuální spuštění
-  schedule:
-    - cron: "0 9 * * *"  # Volitelné: Spouští v 9:00 UTC každý den
 
 jobs:
   test-email:
