@@ -20,7 +20,8 @@ URLS = [
     "https://www.lego.com/cs-cz/product/legolas-gimli-40751",
     "https://www.lego.com/cs-cz/product/eeyore-40797",
     "https://www.lego.com/cs-cz/product/frodo-gollum-40630",
-    "https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672"
+    "https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672",
+    "https://www.lego.com/cs-cz/product/princess-leia-boushh-helmet-75351"
 ]
 
 # Funkce pro kontrolu dostupnosti a ceny
