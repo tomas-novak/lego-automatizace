@@ -3,6 +3,7 @@ name: LEGO Checker Workflow
 on:
   schedule:
     - cron: "0 8 * * *"  # Spustí se v 8:00 UTC
+    - cron: "0 11 * * *"  # Spustí se v 8:00 UTC
     - cron: "0 13 * * *" # Spustí se v 13:00 UTC
     - cron: "0 19 * * *" # Spustí se v 19:00 UTC
   workflow_dispatch: # Umožní manuální spuštění
