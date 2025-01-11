@@ -69,3 +69,8 @@ timestamp,url,availability,price,changes_detected
 2025-01-10 19:09:30,https://www.lego.com/cs-cz/product/frodo-gollum-40630,Vyprodáno,"379,00 Kč",False
 2025-01-10 19:09:33,https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672,Dočasně není na skladě,"499,00 Kč",False
 2025-01-10 19:09:35,https://www.lego.com/cs-cz/product/princess-leia-boushh-helmet-75351,Skladem,"1699,00 Kč",False
+2025-01-11 08:11:34,https://www.lego.com/cs-cz/product/legolas-gimli-40751,Vyprodáno,"499,00 Kč",False
+2025-01-11 08:11:38,https://www.lego.com/cs-cz/product/eeyore-40797,Již brzy – 1. února 2025,"259,00 Kč",False
+2025-01-11 08:11:41,https://www.lego.com/cs-cz/product/frodo-gollum-40630,Vyprodáno,"379,00 Kč",False
+2025-01-11 08:11:43,https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672,Dočasně není na skladě,"499,00 Kč",False
+2025-01-11 08:11:45,https://www.lego.com/cs-cz/product/princess-leia-boushh-helmet-75351,Skladem,"1699,00 Kč",False
