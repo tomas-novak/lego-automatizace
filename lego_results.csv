@@ -486,3 +486,6 @@ timestamp,url,availability,price,changes_detected
 2025-02-02 19:08:58,https://www.lego.com/cs-cz/product/eeyore-40797,Skladem,"259,00 Kč",False
 2025-02-02 19:09:01,https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672,Vyřazený výrobek,Cena nenalezena,False
 2025-02-02 19:09:03,https://www.lego.com/cs-cz/product/princess-leia-boushh-helmet-75351,Skladem,"1699,00 Kč",False
+2025-02-03 08:13:43,https://www.lego.com/cs-cz/product/eeyore-40797,Skladem,"259,00 Kč",False
+2025-02-03 08:13:46,https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672,Vyřazený výrobek,Cena nenalezena,False
+2025-02-03 08:13:50,https://www.lego.com/cs-cz/product/princess-leia-boushh-helmet-75351,Skladem,"1699,00 Kč",False
