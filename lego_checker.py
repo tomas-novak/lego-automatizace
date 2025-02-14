@@ -17,9 +17,9 @@ EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Heslo načtené z proměnné pro
 
 # URL produktů
 URLS = [
-    "https://www.lego.com/cs-cz/product/eeyore-40797",
-    "https://www.lego.com/cs-cz/product/sonic-the-hedgehog-knuckles-shadow-40672",
-    "https://www.lego.com/cs-cz/product/princess-leia-boushh-helmet-75351"
+    "https://www.lego.com/cs-cz/product/iron-man-hulkbuster-vs-thanos-76263",
+    "https://www.lego.com/cs-cz/product/the-crimson-firehawk-75384",
+    "https://www.lego.com/cs-cz/product/baby-dinosaur-rescue-center-76963"
 ]
 
 # Funkce pro kontrolu dostupnosti a ceny
