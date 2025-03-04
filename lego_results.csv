@@ -843,3 +843,6 @@ timestamp,url,availability,price,changes_detected
 2025-03-04 13:20:42,https://www.lego.com/cs-cz/product/iron-man-hulkbuster-vs-thanos-76263,Skladem,Cena nenalezena,False
 2025-03-04 13:20:45,https://www.lego.com/cs-cz/product/the-crimson-firehawk-75384,Skladem,"1299,00 Kč",True
 2025-03-04 13:20:49,https://www.lego.com/cs-cz/product/baby-dinosaur-rescue-center-76963,Skladem,"959,00 Kč",False
+2025-03-04 19:09:24,https://www.lego.com/cs-cz/product/iron-man-hulkbuster-vs-thanos-76263,Skladem,Cena nenalezena,False
+2025-03-04 19:09:26,https://www.lego.com/cs-cz/product/the-crimson-firehawk-75384,Skladem,"1299,00 Kč",False
+2025-03-04 19:09:29,https://www.lego.com/cs-cz/product/baby-dinosaur-rescue-center-76963,Skladem,"959,00 Kč",False
